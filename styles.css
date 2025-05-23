@@ -5,6 +5,7 @@
   --radius: 1.25rem;
 }
 
+/* Reset basics */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -21,6 +22,7 @@ body {
   position: relative;
 }
 
+/* dark green overlay to improve readability */
 .hero::before {
   content: '';
   position: absolute;
@@ -58,7 +60,7 @@ body {
   z-index: 2;
   max-width: 800px;
   margin: 0 auto;
-  padding: 4rem 1rem 2rem;
+  padding: 6rem 1rem 2rem;
   text-align: center;
 }
 
@@ -71,18 +73,17 @@ body {
 
 .subtitle {
   font-size: 1.5rem;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 2.5rem;
 }
 
 .cta-button {
   background: var(--green-700);
   display: inline-block;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   border-radius: 999px;
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -93,23 +94,23 @@ body {
 
 .cards {
   display: grid;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 .card {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   background: var(--cream);
   color: #1a1a1a;
   padding: 1rem 1.5rem;
   border-radius: var(--radius);
-  min-height: 80px;
 }
 
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   margin-right: 1rem;
   border-radius: 50%;
   background: var(--green-700);
@@ -118,20 +119,21 @@ body {
   align-items: center;
 }
 
-.card-icon img {
-  width: 24px;
-  height: 24px;
+.card-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #ffffff;
 }
 
 .info h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 .info p {
-  margin: 0.2rem 0 0;
-  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
   color: #444444;
 }
 
@@ -143,6 +145,7 @@ footer {
   padding: 1rem 0;
 }
 
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .hero {
     background-position: center bottom;
@@ -150,6 +153,7 @@ footer {
 
   .content {
     padding-top: 3rem;
+    padding-bottom: 1rem;
   }
 
   .cta-button {
