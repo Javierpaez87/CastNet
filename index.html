@@ -4,11 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CastNet – Fly Fishing Patagonia</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="hero">
+    <!-- ▸ Barra de navegación -->
     <header class="navbar">
       <img src="assets/logo.svg" alt="CastNet Logo" class="logo"/>
       <nav>
@@ -19,10 +24,46 @@
       </nav>
     </header>
 
+    <!-- ▸ Contenido principal -->
     <main class="content">
       <h1 class="title">CastNet</h1>
-      <p class="subtitle">Connecting Anglers &amp; Guides</p>
-      <a href="#" class="cta-button">Planea tu próxima salida de pesca</a>
+      <p class="subtitle">
+        Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos.
+        Casteá en red.
+      </p>
+
+      <!-- ▸ Formulario tipo “Booking” -->
+      <form class="search-form" action="#" method="get">
+        <div class="form-field">
+          <label for="location" class="sr-only">Ubicación</label>
+          <input type="text" id="location" name="location" placeholder="Ubicación" required>
+        </div>
+
+        <div class="form-field">
+          <label for="start-date" class="sr-only">Día de salida</label>
+          <input type="date" id="start-date" name="start" required>
+        </div>
+
+        <div class="form-field">
+          <label for="end-date" class="sr-only">Día de regreso</label>
+          <input type="date" id="end-date" name="end" required>
+        </div>
+
+        <div class="form-field">
+          <label for="start-time" class="sr-only">Horario de salida</label>
+          <input type="time" id="start-time" name="startTime" required>
+        </div>
+
+        <div class="form-field">
+          <label for="end-time" class="sr-only">Horario de retorno</label>
+          <input type="time" id="end-time" name="endTime" required>
+        </div>
+
+        <button type="submit" class="cta-button">Buscar</button>
+      </form>
+
+      <!-- ▸ Sección de recomendaciones -->
+      <h2 class="section-heading">Opciones recomendadas para ti</h2>
 
       <section class="cards">
         <div class="card">
@@ -64,6 +105,7 @@
     </main>
   </div>
 
+  <!-- ▸ Footer -->
   <footer>
     © 2025 CastNet. Todos los derechos reservados.
   </footer>
