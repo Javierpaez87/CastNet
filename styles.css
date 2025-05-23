@@ -1,0 +1,146 @@
+:root {
+  --green-900: #0b2e21;
+  --green-700: #254b3f;
+  --cream: #f5f1d4;
+  --radius: 1.25rem;
+}
+
+/* Reset basics */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+}
+
+.hero {
+  min-height: 100vh;
+  background: url('assets/background.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+/* dark green overlay to improve readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,46,33,0.8) 0%, rgba(11,46,33,0.5) 60%, rgba(11,46,33,0.9) 100%);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.navbar nav a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.navbar nav a:hover {
+  opacity: 0.75;
+}
+
+.logo {
+  height: 42px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 6rem 1rem 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.cta-button {
+  background: var(--green-700);
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.cards {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  background: var(--cream);
+  color: #1a1a1a;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background: var(--green-700);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #ffffff;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.info p {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: #444444;
+}
+
+footer {
+  background: #000000;
+  color: #cccccc;
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 1rem 0;
+}
