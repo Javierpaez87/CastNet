@@ -5,7 +5,6 @@
   --radius: 1.25rem;
 }
 
-/* Reset basics */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -22,7 +21,6 @@ body {
   position: relative;
 }
 
-/* dark green overlay to improve readability */
 .hero::before {
   content: '';
   position: absolute;
@@ -94,8 +92,8 @@ body {
 
 .cards {
   display: grid;
-  gap: 1.5rem;
-  margin-top: 3rem;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .card {
@@ -104,14 +102,15 @@ body {
   align-items: center;
   background: var(--cream);
   color: #1a1a1a;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius);
+  min-height: 80px;
 }
 
 .card-icon {
-  width: 52px;
-  height: 52px;
-  margin-right: 1rem;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.75rem;
   border-radius: 50%;
   background: var(--green-700);
   display: flex;
@@ -120,20 +119,20 @@ body {
 }
 
 .card-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   fill: #ffffff;
 }
 
 .info h3 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
 .info p {
-  margin: 0.25rem 0 0;
-  font-size: 1rem;
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
   color: #444444;
 }
 
@@ -145,7 +144,6 @@ footer {
   padding: 1rem 0;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .hero {
     background-position: center bottom;
