@@ -182,4 +182,41 @@ body {
 .card-icon svg {
   width: 28px;
   height: 28px;
-  fil
+  fill: #ffffff;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.info p {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: #444444;
+}
+
+/* ───── Footer ───── */
+footer {
+  background: #000000;
+  color: #cccccc;
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 1rem 0;
+}
+
+/* ───── Ajustes responsivos < 768 px ───── */
+@media (max-width: 768px) {
+  .hero { background-position: center bottom; }
+
+  .content {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+  }
+}
