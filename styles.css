@@ -1,3 +1,4 @@
+/* ───── Variables de color y radio global ───── */
 :root {
   --green-900: #0b2e21;
   --green-700: #254b3f;
@@ -5,7 +6,7 @@
   --radius: 1.25rem;
 }
 
-/* Reset basics */
+/* ───── Reset básico ───── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -16,20 +17,25 @@ body {
   color: #ffffff;
 }
 
+/* ───── Hero con background + overlay ───── */
 .hero {
   min-height: 100vh;
   background: url('assets/background.jpg') center/cover no-repeat;
   position: relative;
 }
 
-/* dark green overlay to improve readability */
-.hero::before {
+.hero::before {            /* Capa verde para mejorar contraste */
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11,46,33,0.8) 0%, rgba(11,46,33,0.5) 60%, rgba(11,46,33,0.9) 100%);
+  background: linear-gradient(
+      180deg,
+      rgba(11,46,33,0.80) 0%,
+      rgba(11,46,33,0.50) 60%,
+      rgba(11,46,33,0.90) 100%);
 }
 
+/* ───── NavBar ───── */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -47,14 +53,12 @@ body {
   transition: opacity 0.2s ease;
 }
 
-.navbar nav a:hover {
-  opacity: 0.75;
-}
+.navbar nav a:hover { opacity: 0.75; }
 
-.logo {
-  height: 42px;
-}
+/* Logo */
+.logo { height: 42px; }
 
+/* ───── Contenido central ───── */
 .content {
   position: relative;
   z-index: 2;
@@ -76,6 +80,62 @@ body {
   margin: 1rem 0 2.5rem;
 }
 
+/* ───── Formulario de búsqueda ───── */
+.search-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.search-form input,
+.search-form button {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1rem;
+}
+
+.search-form input {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.search-form button {
+  background: var(--green-700);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.search-form button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Etiquetas solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ───── Heading de sección ───── */
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  margin: 0 0 2rem;
+}
+
+/* ───── CTA genérica ───── */
 .cta-button {
   background: var(--green-700);
   display: inline-block;
@@ -92,10 +152,10 @@ body {
   transform: translateY(-2px);
 }
 
+/* ───── Cards de recomendaciones ───── */
 .cards {
   display: grid;
   gap: 1.5rem;
-  margin-top: 3rem;
 }
 
 .card {
@@ -122,42 +182,4 @@ body {
 .card-icon svg {
   width: 28px;
   height: 28px;
-  fill: #ffffff;
-}
-
-.info h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.info p {
-  margin: 0.25rem 0 0;
-  font-size: 1rem;
-  color: #444444;
-}
-
-footer {
-  background: #000000;
-  color: #cccccc;
-  text-align: center;
-  font-size: 0.75rem;
-  padding: 1rem 0;
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .hero {
-    background-position: center bottom;
-  }
-
-  .content {
-    padding-top: 3rem;
-    padding-bottom: 1rem;
-  }
-
-  .cta-button {
-    font-size: 1rem;
-    padding: 0.75rem 2rem;
-  }
-}
+  fil
