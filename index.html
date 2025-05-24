@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CastNet – Fly Fishing Patagonia</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="hero">
-    <!-- ▸ Barra de navegación -->
     <header class="navbar">
       <img src="assets/logo.svg" alt="CastNet Logo" class="logo"/>
       <nav>
@@ -24,54 +19,33 @@
       </nav>
     </header>
 
-    <!-- ▸ Contenido principal -->
     <main class="content">
       <h1 class="title">CastNet</h1>
-      <p class="subtitle">
-        Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos.
-         <p class="subtitle">
-        Casteá en red.
-      </p>
+      <p class="subtitle">Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos.</p>
+      <p class="subtitle small">Casteá en red.</p>
 
-      <!-- ▸ Formulario tipo “Booking” -->
+      <!-- Formulario -->
       <form class="search-form" action="#" method="get">
-        <div class="form-field">
-          <label for="location" class="sr-only">Ubicación</label>
-          <input type="text" id="location" name="location" placeholder="Ubicación" required>
+        <div class="form-row">
+          <div class="form-field"><input type="text" placeholder="Ubicación" required></div>
+          <div class="form-field"><input type="date" required></div>
+          <div class="form-field"><input type="date" required></div>
         </div>
-
-        <div class="form-field">
-          <label for="start-date" class="sr-only">Día de salida</label>
-          <input type="date" id="start-date" name="start" required>
+        <div class="form-row">
+          <div class="form-field"><input type="time" required></div>
+          <div class="form-field"><input type="time" required></div>
         </div>
-
-        <div class="form-field">
-          <label for="end-date" class="sr-only">Día de regreso</label>
-          <input type="date" id="end-date" name="end" required>
+        <div class="form-row">
+          <button type="submit" class="cta-button">Buscar</button>
         </div>
-
-        <div class="form-field">
-          <label for="start-time" class="sr-only">Horario de salida</label>
-          <input type="time" id="start-time" name="startTime" required>
-        </div>
-
-        <div class="form-field">
-          <label for="end-time" class="sr-only">Horario de retorno</label>
-          <input type="time" id="end-time" name="endTime" required>
-        </div>
-
-        <button type="submit" class="cta-button">Buscar</button>
       </form>
 
-      <!-- ▸ Sección de recomendaciones -->
+      <!-- Recomendaciones -->
       <h2 class="section-heading">Opciones recomendadas para ti</h2>
-
       <section class="cards">
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21 12s-4-5-9-5-9 5-9 5 4 5 9 5 9-5 9-5zm-9 3a3 3 0 110-6 3 3 0 010 6z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12s-4-5-9-5-9 5-9 5 4 5 9 5 9-5 9-5zm-9 3a3 3 0 110-6 3 3 0 010 6z"/></svg>
           </div>
           <div class="info">
             <h3>Mar 12 – 14</h3>
@@ -81,9 +55,7 @@
 
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3v10a4 4 0 104 4h-2a2 2 0 11-2-2V3h-2z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M12 3v10a4 4 0 104 4h-2a2 2 0 11-2-2V3h-2z"/></svg>
           </div>
           <div class="info">
             <h3>Apr 5 – 6</h3>
@@ -93,9 +65,7 @@
 
         <div class="card">
           <div class="card-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3 12s4-4 9-4 9 4 9 4-4 4-9 4-9-4-9-4z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M3 12s4-4 9-4 9 4 9 4-4 4-9 4-9-4-9-4z"/></svg>
           </div>
           <div class="info">
             <h3>May 19 – 22</h3>
@@ -103,10 +73,31 @@
           </div>
         </div>
       </section>
+
+      <!-- Testimonios -->
+      <h2 class="section-heading">Testimonios</h2>
+      <section class="testimonials">
+        <div class="testimonial">
+          <img src="assets/lucas.jpg" alt="Lucas">
+          <blockquote>“Conocí a un guía de Junín y terminé pescando con su grupo en el Limay medio. Inolvidable.”</blockquote>
+          <p class="author">Lucas, Bariloche</p>
+        </div>
+
+        <div class="testimonial">
+          <img src="assets/clemence.jpg" alt="Clémence">
+          <blockquote>“Lo mejor de CastNet no es el ahorro, es la conexión humana.”</blockquote>
+          <p class="author">Clémence, Francia</p>
+        </div>
+
+        <div class="testimonial">
+          <img src="assets/tom.jpg" alt="Tom">
+          <blockquote>“Reservé una flotada en el río Malleo con un guía local y terminé pescando mi mejor trucha.”</blockquote>
+          <p class="author">Tom, EE.UU.</p>
+        </div>
+      </section>
     </main>
   </div>
 
-  <!-- ▸ Footer -->
   <footer>
     © 2025 CastNet. Todos los derechos reservados.
   </footer>
