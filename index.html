@@ -15,7 +15,7 @@
         <a href="#">Trips</a>
         <a href="#">Anglers</a>
         <a href="#">Guides</a>
-        <a href="login.html">Log&nbsp;in</a>
+        <a href="#">Log&nbsp;in</a>
       </nav>
     </header>
 
@@ -43,13 +43,57 @@
       <!-- Recomendaciones -->
       <h2 class="section-heading">Opciones recomendadas para ti</h2>
       <section class="cards">
-        <!-- Cards -->
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 12s-4-5-9-5-9 5-9 5 4 5 9 5 9-5 9-5zm-9 3a3 3 0 110-6 3 3 0 010 6z"/></svg>
+          </div>
+          <div class="info">
+            <h3>Mar 12 – 14</h3>
+            <p>Near Lago Paimún</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10a4 4 0 104 4h-2a2 2 0 11-2-2V3h-2z"/></svg>
+          </div>
+          <div class="info">
+            <h3>Apr 5 – 6</h3>
+            <p>Mackenzie Boat flotada Chimehuin arriba</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 12s4-4 9-4 9 4 9 4-4 4-9 4-9-4-9-4z"/></svg>
+          </div>
+          <div class="info">
+            <h3>May 19 – 22</h3>
+            <p>Collón Cura</p>
+          </div>
+        </div>
       </section>
 
       <!-- Testimonios -->
       <h2 class="section-heading">Testimonios</h2>
       <section class="testimonials">
-        <!-- Testimonios -->
+        <div class="testimonial">
+          <img src="assets/luca.jpg" alt="Luca">
+          <blockquote>“Con CastNet me sumé a una flotada en Catarraft por el Chimehuin arriba (saiendo de Huechulafquen) con locales de Junín de los Andes. Mejor experiencia imposible.”</blockquote>
+          <p class="author">Luca, Torino</p>
+        </div>
+
+        <div class="testimonial">
+          <img src="assets/clemence.jpg" alt="Clémence">
+          <blockquote>“Lo mejor de CastNet es la conexión humana. Enfermos de la pesca ahora nos econtramos mas rapido”</blockquote>
+          <p class="author">Clémence, Francia</p>
+        </div>
+
+        <div class="testimonial">
+          <img src="assets/tom.jpg" alt="Tom">
+          <blockquote>“Reservé una flotada en el río Malleo con un guía, y a ultimo momento mis amigos no pudieron venir. Por suerte con CastNet consegui dos tremendos pescadores (ahora amigos) que mejoraron por mucho la experiencia.”</blockquote>
+          <p class="author">Tom, EE.UU.</p>
+        </div>
       </section>
     </main>
   </div>
@@ -57,24 +101,5 @@
   <footer>
     © 2025 CastNet. Todos los derechos reservados.
   </footer>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
-      authDomain: "castnet-8a81c.firebaseapp.com",
-      projectId: "castnet-8a81c",
-      storageBucket: "castnet-8a81c.appspot.com",
-      messagingSenderId: "685260060310",
-      appId: "1:685260060310:web:e82e1193ec898d489474b7",
-      measurementId: "G-FFZPFNK4MW"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-  </script>
 </body>
 </html>
