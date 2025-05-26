@@ -103,18 +103,16 @@
           <span class="close-btn" id="close-modal">&times;</span>
           <h2 id="modal-title">Autenticación</h2>
           <form id="auth-form">
-            <div id="register-fields" class="hidden">
-              <input type="text" id="first-name" placeholder="Nombre" required />
-              <input type="text" id="last-name" placeholder="Apellido" required />
-            </div>
+            <input type="text" id="first-name" placeholder="Nombre" class="hidden" />
+            <input type="text" id="last-name" placeholder="Apellido" class="hidden" />
             <input type="email" id="email" placeholder="Email" required />
             <input type="password" id="password" placeholder="Contraseña" required />
-            <input type="password" id="confirm-password" placeholder="Confirmar contraseña" class="hidden" />
+            <input type="password" id="confirm-password" placeholder="Confirmar Contraseña" class="hidden" />
             <button type="submit" id="btn-auth-action">Ingresar</button>
           </form>
-          <div id="auth-providers" class="hidden">
-            <button id="google-login">Registrarse con Google</button>
-            <button id="facebook-login">Registrarse con Facebook</button>
+          <div id="social-logins" class="social-buttons">
+            <button id="btn-google" class="social-button">Continuar con Google</button>
+            <button id="btn-facebook" class="social-button">Continuar con Facebook</button>
           </div>
           <p id="auth-message"></p>
         </div>
@@ -127,11 +125,9 @@
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
 
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-  <!-- Inicialización y lógica Auth -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
@@ -144,6 +140,8 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const providerGoogle = new firebase.auth.GoogleAuthProvider();
+    const providerFacebook = new firebase.auth.FacebookAuthProvider();
 
     const modal = document.getElementById('auth-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -154,8 +152,9 @@
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
-    const registerFields = document.getElementById('register-fields');
-    const authProviders = document.getElementById('auth-providers');
+    const firstNameInput = document.getElementById('first-name');
+    const lastNameInput = document.getElementById('last-name');
+    const socialLogins = document.getElementById('social-logins');
 
     let isLogin = true;
 
@@ -164,9 +163,10 @@
       isLogin = true;
       modalTitle.textContent = 'Ingresar';
       btnAuthAction.textContent = 'Ingresar';
-      registerFields.classList.add('hidden');
+      socialLogins.style.display = 'flex';
+      firstNameInput.classList.add('hidden');
+      lastNameInput.classList.add('hidden');
       confirmPasswordInput.classList.add('hidden');
-      authProviders.classList.add('hidden');
       modal.classList.remove('hidden');
     });
 
@@ -175,9 +175,10 @@
       isLogin = false;
       modalTitle.textContent = 'Registrarse';
       btnAuthAction.textContent = 'Registrarse';
-      registerFields.classList.remove('hidden');
+      socialLogins.style.display = 'none';
+      firstNameInput.classList.remove('hidden');
+      lastNameInput.classList.remove('hidden');
       confirmPasswordInput.classList.remove('hidden');
-      authProviders.classList.remove('hidden');
       modal.classList.remove('hidden');
     });
 
@@ -194,18 +195,15 @@
       const confirmPassword = confirmPasswordInput.value;
       authMessage.textContent = '';
 
-      if (!isLogin && password !== confirmPassword) {
-        authMessage.style.color = 'red';
-        authMessage.textContent = 'Las contraseñas no coinciden.';
-        return;
-      }
-
       try {
         if (isLogin) {
           await auth.signInWithEmailAndPassword(email, password);
           authMessage.style.color = 'green';
           authMessage.textContent = 'Ingreso exitoso. ¡Bienvenido!';
         } else {
+          if (password !== confirmPassword) {
+            throw new Error("Las contraseñas no coinciden.");
+          }
           await auth.createUserWithEmailAndPassword(email, password);
           authMessage.style.color = 'green';
           authMessage.textContent = 'Usuario registrado exitosamente.';
@@ -216,23 +214,27 @@
       }
     });
 
-    document.getElementById('google-login').addEventListener('click', async () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
+    document.getElementById('btn-google').addEventListener('click', async () => {
       try {
-        await auth.signInWithPopup(provider);
+        await auth.signInWithPopup(providerGoogle);
+        authMessage.style.color = 'green';
+        authMessage.textContent = 'Ingreso exitoso con Google.';
+        modal.classList.add('hidden');
       } catch (error) {
         authMessage.style.color = 'red';
-        authMessage.textContent = 'Error con Google: ' + error.message;
+        authMessage.textContent = 'Error: ' + error.message;
       }
     });
 
-    document.getElementById('facebook-login').addEventListener('click', async () => {
-      const provider = new firebase.auth.FacebookAuthProvider();
+    document.getElementById('btn-facebook').addEventListener('click', async () => {
       try {
-        await auth.signInWithPopup(provider);
+        await auth.signInWithPopup(providerFacebook);
+        authMessage.style.color = 'green';
+        authMessage.textContent = 'Ingreso exitoso con Facebook.';
+        modal.classList.add('hidden');
       } catch (error) {
         authMessage.style.color = 'red';
-        authMessage.textContent = 'Error con Facebook: ' + error.message;
+        authMessage.textContent = 'Error: ' + error.message;
       }
     });
 
