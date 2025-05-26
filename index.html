@@ -95,6 +95,18 @@
           <p class="author">Tom, EE.UU.</p>
         </div>
       </section>
+
+      <!-- Formulario de Registro / Login con Firebase -->
+      <section id="auth-section" style="max-width: 400px; margin: 2rem auto;">
+        <h2>Registro / Ingreso</h2>
+        <form id="auth-form">
+          <input type="email" id="email" placeholder="Email" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;" />
+          <input type="password" id="password" placeholder="Contraseña" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;" />
+          <button type="submit" id="btn-login" style="width: 100%; padding: 0.5rem;">Ingresar / Registrar</button>
+        </form>
+        <p id="auth-message" style="color: red; margin-top: 1rem;"></p>
+      </section>
+
     </main>
   </div>
 
@@ -102,25 +114,71 @@
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
 
-  <!-- Firebase scripts -->
-  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
+  <!-- Inicialización y lógica Auth -->
   <script>
+    // REEMPLAZA ESTOS DATOS CON LOS DE TU PROYECTO FIREBASE
     const firebaseConfig = {
-      apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
-      authDomain: "castnet-8a81c.firebaseapp.com",
-      projectId: "castnet-8a81c",
-      storageBucket: "castnet-8a81c.firebasestorage.app",
-      messagingSenderId: "685260060310",
-      appId: "1:685260060310:web:e82e1193ec898d489474b7",
-      measurementId: "G-FFZPFNK4MW"
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_SENDER_ID",
+      appId: "TU_APP_ID"
     };
 
     // Inicializar Firebase
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+    const auth = firebase.auth();
+
+    const authForm = document.getElementById('auth-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const authMessage = document.getElementById('auth-message');
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      authMessage.textContent = ''; // limpiar mensaje
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      try {
+        // Intentar login primero
+        await auth.signInWithEmailAndPassword(email, password);
+        authMessage.style.color = 'green';
+        authMessage.textContent = 'Ingreso exitoso. ¡Bienvenido!';
+      } catch (loginError) {
+        if (loginError.code === 'auth/user-not-found') {
+          // Si no existe el usuario, crear cuenta
+          try {
+            await auth.createUserWithEmailAndPassword(email, password);
+            authMessage.style.color = 'green';
+            authMessage.textContent = 'Usuario creado y logueado exitosamente.';
+          } catch (registerError) {
+            authMessage.style.color = 'red';
+            authMessage.textContent = 'Error al crear usuario: ' + registerError.message;
+          }
+        } else {
+          authMessage.style.color = 'red';
+          authMessage.textContent = 'Error al ingresar: ' + loginError.message;
+        }
+      }
+    });
+
+    // Detectar cambios en el estado de autenticación (opcional)
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('Usuario logueado:', user.email);
+        // Aquí podés modificar la UI si querés
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
   </script>
+
 </body>
 </html>
