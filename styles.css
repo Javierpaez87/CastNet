@@ -284,3 +284,50 @@ footer {
   .content { padding-top: 3rem; padding-bottom: 1rem; }
   .cta-button { font-size: 1rem; padding: 0.75rem 2rem; }
 }
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.social-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+#btn-google {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+#btn-google:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+#btn-facebook {
+  background-color: #1877f2;
+  color: #ffffff;
+}
+
+#btn-facebook:hover {
+  background-color: #155ec4;
+  transform: translateY(-1px);
+}
