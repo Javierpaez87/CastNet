@@ -45,7 +45,7 @@
       <section class="cards">
         <div class="card">
           <div class="card-icon">
-  <img src="assets/lancha.png" alt="Lancha Icon" style="width: 28px; height: 28px;" />
+            <img src="assets/lancha.png" alt="Lancha Icon" style="width: 28px; height: 28px;" />
           </div>
           <div class="info">
             <h3>Mar 12 – 14</h3>
@@ -54,9 +54,9 @@
         </div>
 
         <div class="card">
-         <div class="card-icon">
-  <img src="assets/mackenzie.png" alt="Mackenzie Boat Icon" style="width: 28px; height: 28px;" />
-</div>
+          <div class="card-icon">
+            <img src="assets/mackenzie.png" alt="Mackenzie Boat Icon" style="width: 28px; height: 28px;" />
+          </div>
           <div class="info">
             <h3>Apr 5 – 6</h3>
             <p>Catarraft + Balsa: Chimehuin arriba (2 lugares)</p>
@@ -65,7 +65,7 @@
 
         <div class="card">
           <div class="card-icon">
-  <img src="assets/vadeo.png" alt="Vadeo Icon" style="width: 28px; height: 28px;" />
+            <img src="assets/vadeo.png" alt="Vadeo Icon" style="width: 28px; height: 28px;" />
           </div>
           <div class="info">
             <h3>May 19 – 22</h3>
@@ -101,5 +101,26 @@
   <footer>
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
+
+  <!-- Firebase scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
+      authDomain: "castnet-8a81c.firebaseapp.com",
+      projectId: "castnet-8a81c",
+      storageBucket: "castnet-8a81c.firebasestorage.app",
+      messagingSenderId: "685260060310",
+      appId: "1:685260060310:web:e82e1193ec898d489474b7",
+      measurementId: "G-FFZPFNK4MW"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
 </body>
 </html>
