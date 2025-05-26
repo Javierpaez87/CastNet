@@ -97,28 +97,19 @@
         </div>
       </section>
 
-      <!-- Formulario de Registro / Login con Firebase -->
-      <section id="auth-section" style="max-width: 400px; margin: 2rem auto;">
-        <h2>Registro / Ingreso</h2>
-        <form id="auth-form">
-          <input type="email" id="email" placeholder="Email" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;" />
-          <input type="password" id="password" placeholder="Contraseña" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem;" />
-          <button type="submit" id="btn-login" style="width: 100%; padding: 0.5rem;">Ingresar / Registrar</button>
-        </form>
-        <p id="auth-message" style="color: red; margin-top: 1rem;"></p>
-      </section>
-<div id="auth-modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close-btn" id="close-modal">&times;</span>
-    <h2 id="modal-title">Autenticación</h2>
-    <form id="auth-form">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Contraseña" required />
-      <button type="submit" id="btn-auth-action">Ingresar</button>
-    </form>
-    <p id="auth-message"></p>
-  </div>
-</div>
+      <!-- Modal de Login/Register -->
+      <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-btn" id="close-modal">&times;</span>
+          <h2 id="modal-title">Autenticación</h2>
+          <form id="auth-form">
+            <input type="email" id="email" placeholder="Email" required />
+            <input type="password" id="password" placeholder="Contraseña" required />
+            <button type="submit" id="btn-auth-action">Ingresar</button>
+          </form>
+          <p id="auth-message"></p>
+        </div>
+      </div>
 
     </main>
   </div>
@@ -126,3 +117,87 @@
   <footer>
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <!-- Inicialización y lógica Auth -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
+      authDomain: "castnet-8a81c.firebaseapp.com",
+      projectId: "castnet-8a81c",
+      storageBucket: "castnet-8a81c.firebasestorage.app",
+      messagingSenderId: "685260060310",
+      appId: "1:685260060310:web:e82e1193ec898d489474b7"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const modal = document.getElementById('auth-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const btnAuthAction = document.getElementById('btn-auth-action');
+    const closeModalBtn = document.getElementById('close-modal');
+    const authForm = document.getElementById('auth-form');
+    const authMessage = document.getElementById('auth-message');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    let isLogin = true;
+
+    document.getElementById('btn-open-login').addEventListener('click', (e) => {
+      e.preventDefault();
+      isLogin = true;
+      modalTitle.textContent = 'Ingresar';
+      btnAuthAction.textContent = 'Ingresar';
+      modal.classList.remove('hidden');
+    });
+
+    document.getElementById('btn-open-register').addEventListener('click', (e) => {
+      e.preventDefault();
+      isLogin = false;
+      modalTitle.textContent = 'Registrarse';
+      btnAuthAction.textContent = 'Registrarse';
+      modal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      authForm.reset();
+      authMessage.textContent = '';
+    });
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      authMessage.textContent = '';
+
+      try {
+        if (isLogin) {
+          await auth.signInWithEmailAndPassword(email, password);
+          authMessage.style.color = 'green';
+          authMessage.textContent = 'Ingreso exitoso. ¡Bienvenido!';
+        } else {
+          await auth.createUserWithEmailAndPassword(email, password);
+          authMessage.style.color = 'green';
+          authMessage.textContent = 'Usuario registrado exitosamente.';
+        }
+      } catch (error) {
+        authMessage.style.color = 'red';
+        authMessage.textContent = 'Error: ' + error.message;
+      }
+    });
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('Usuario logueado:', user.email);
+        modal.classList.add('hidden');
+        authForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>
