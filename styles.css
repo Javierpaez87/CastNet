@@ -15,7 +15,7 @@ body {
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Evitar scroll horizontal */
+  overflow-x: hidden;
 }
 
 .hero {
@@ -104,7 +104,7 @@ body {
   border-radius: var(--radius);
   border: none;
   font-size: 1.125rem;
-  min-height: 48px; /* Tamaño táctil mínimo recomendado */
+  min-height: 48px;
   transition: box-shadow 0.2s ease;
 }
 
@@ -152,7 +152,7 @@ body {
   color: #1a1a1a;
   padding: 1rem 1.5rem;
   border-radius: var(--radius);
-  word-break: break-word; /* Evita overflow de texto largo */
+  word-break: break-word;
 }
 
 .card-icon {
@@ -186,7 +186,6 @@ body {
   line-height: 1.4;
 }
 
-/* Testimonios */
 .testimonials {
   display: grid;
   gap: 2rem;
@@ -219,7 +218,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Footer */
 footer {
   background: #000000;
   color: #cccccc;
@@ -228,7 +226,6 @@ footer {
   padding: 1rem 0;
 }
 
-/* Modal de login/register */
 .modal {
   position: fixed;
   inset: 0;
@@ -301,7 +298,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Social buttons */
 .social-buttons {
   display: flex;
   flex-direction: column;
@@ -364,13 +360,50 @@ footer {
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  position: relative;
 }
 
 .user-button:hover {
   background-color: var(--green-900);
 }
 
-/* Responsive */
+/* Profile Dropdown */
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  display: none;
+  z-index: 1000;
+}
+
+.profile-dropdown.active {
+  display: block;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown a:hover {
+  background-color: var(--cream);
+}
+
+.profile-dropdown a:first-child {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.profile-dropdown a:last-child {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
 
 @media (max-width: 768px) {
   .hero {
@@ -406,7 +439,7 @@ footer {
   }
 
   .form-row {
-    grid-template-columns: 1fr !important; /* Una columna para inputs en móvil */
+    grid-template-columns: 1fr !important;
   }
 
   .search-form input,
@@ -425,7 +458,7 @@ footer {
   }
 
   .card {
-    grid-template-columns: 1fr !important; /* Cards apiladas */
+    grid-template-columns: 1fr !important;
     padding: 1rem;
   }
 
@@ -437,26 +470,22 @@ footer {
   }
 }
 
-/* --- NUEVO LAYOUT DEL HEADER ---------------------------------------------- */
 .navbar {
-  display: flex;              /* ya lo tenías, pero lo dejamos claro */
+  display: flex;
   align-items: center;
   padding: 1.5rem 2rem;
 }
 
-/* Empuja el <nav> a la derecha para que logo + avatar queden a la izquierda */
 .navbar > nav {
-  margin-left: auto;          /* << empuja todo el nav al extremo derecho */
+  margin-left: auto;
   display: flex;
   align-items: center;
 }
 
-/* Pequeño espacio entre logo y avatar */
 #user-icon {
-  margin-left: 1rem;          /* ajustá el valor si querés más/menos espacio */
+  margin-left: 1rem;
 }
 
-/* Asegurar que "hidden" realmente oculte el avatar cuando no hay sesión */
 .hidden {
   display: none !important;
 }
