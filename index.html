@@ -16,7 +16,7 @@
         <a href="#">Anglers</a>
         <a href="#">Guides</a>
         <a href="#" id="btn-open-login">Log&nbsp;in</a>
-        <a href="#" id="btn-open-register">Register</a>
+        <a href="#" id="btn-open-registro">Registro</a>
         <a href="#" id="user-icon" class="user-initials hidden"></a>
       </nav>
     </header>
@@ -98,7 +98,7 @@
         </div>
       </section>
 
-      <!-- Modal de Login/Register -->
+      <!-- Modal de Login/Registro -->
       <div id="auth-modal" class="modal hidden">
         <div class="modal-content">
           <span class="close-btn" id="close-modal">&times;</span>
@@ -163,7 +163,7 @@
     const lastNameInput = document.getElementById('last-name');
     const socialLogins = document.getElementById('social-logins');
     const loginBtn = document.getElementById('btn-open-login');
-    const registerBtn = document.getElementById('btn-open-register');
+    const registroBtn = document.getElementById('btn-open-registro');
     const userIcon = document.getElementById('user-icon');
 
     let isLogin = true;
@@ -180,7 +180,7 @@
       modal.classList.remove('hidden');
     });
 
-    registerBtn.addEventListener('click', (e) => {
+    registroBtn.addEventListener('click', (e) => {
       e.preventDefault();
       isLogin = false;
       modalTitle.textContent = 'Registrarse';
@@ -265,7 +265,7 @@
         userIcon.textContent = initials;
         userIcon.classList.remove('hidden');
         loginBtn.classList.add('hidden');
-        registerBtn.classList.add('hidden');
+        registroBtn.classList.add('hidden');
 
         userIcon.addEventListener('click', () => {
           auth.signOut();
@@ -273,7 +273,7 @@
       } else {
         userIcon.classList.add('hidden');
         loginBtn.classList.remove('hidden');
-        registerBtn.classList.remove('hidden');
+        registroBtn.classList.remove('hidden');
       }
     });
   </script>
