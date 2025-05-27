@@ -9,29 +9,32 @@
 </head>
 <body>
   <div class="hero">
-<header class="navbar">
-  <!-- Logo -->
-  <img src="assets/hook-icon.png" alt="CastNet Logo" class="logo" />
+    <header class="navbar">
+      <img src="assets/hook-icon.png" alt="CastNet Logo" class="logo" />
+      <div class="user-profile">
+        <a href="#" id="user-icon" class="user-button hidden"></a>
+        <div class="profile-dropdown" id="profile-dropdown">
+          <a href="#profile">Mi Perfil</a>
+          <a href="#settings">Ajustes de Perfil</a>
+          <a href="#publish">Publica Salida de Pesca</a>
+          <a href="#search">Buscar Salida de Pesca</a>
+          <a href="#" id="logout">Cerrar Sesión</a>
+        </div>
+      </div>
+      <nav>
+        <a href="#">Trips</a>
+        <a href="#">Anglers</a>
+        <a href="#">Guides</a>
+        <a href="#" id="btn-open-login">Log&nbsp;in</a>
+        <a href="#" id="btn-open-register">Register</a>
+      </nav>
+    </header>
 
-  <!-- Avatar con iniciales (oculto hasta que el usuario inicia sesión) -->
-  <a href="#" id="user-icon" class="user-button hidden"></a>
-
-  <!-- Navegación -->
-  <nav>
-    <a href="#">Trips</a>
-    <a href="#">Anglers</a>
-    <a href="#">Guides</a>
-    <a href="#" id="btn-open-login">Log&nbsp;in</a>
-    <a href="#" id="btn-open-register">Register</a>
-  </nav>
-</header>
-</header>
     <main class="content">
       <h1 class="title">CastNet</h1>
       <p class="subtitle small">Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos y lagos.</p>
       <p class="subtitle small">Casteá en red.</p>
 
-      <!-- Formulario -->
       <form class="search-form" action="#" method="get">
         <div class="form-row">
           <div class="form-field"><input type="text" placeholder="Ubicación" required></div>
@@ -47,7 +50,6 @@
         </div>
       </form>
 
-      <!-- Recomendaciones -->
       <h2 class="section-heading">Opciones recomendadas para ti</h2>
       <section class="cards">
         <div class="card">
@@ -81,29 +83,27 @@
         </div>
       </section>
 
-      <!-- Testimonios -->
       <h2 class="section-heading">Testimonios</h2>
       <section class="testimonials">
         <div class="testimonial">
           <img src="assets/Luca.png" alt="Luca">
-          <blockquote>“Con CastNet me sumé a una flotada en Catarraft por el Chimehuin arriba (saliendo de Huechulafquen) con locales de Junín de los Andes. Mejor experiencia imposible.”</blockquote>
+          <blockquote>"Con CastNet me sumé a una flotada en Catarraft por el Chimehuin arriba (saliendo de Huechulafquen) con locales de Junín de los Andes. Mejor experiencia imposible."</blockquote>
           <p class="author">Luca, Torino</p>
         </div>
 
         <div class="testimonial">
           <img src="assets/Clemence.png" alt="Clémence">
-          <blockquote>“Lo mejor de CastNet es la conexión humana. Enfermos de la pesca ahora nos econtramos mas rapido”</blockquote>
+          <blockquote>"Lo mejor de CastNet es la conexión humana. Enfermos de la pesca ahora nos econtramos mas rapido"</blockquote>
           <p class="author">Clémence, Francia</p>
         </div>
 
         <div class="testimonial">
           <img src="assets/Tom.png" alt="Tom">
-          <blockquote>“Reservé una flotada en el río Malleo con un guía, y a ultimo momento mis amigos no pudieron venir. Por suerte con CastNet consegui dos tremendos pescadores (ahora amigos) que mejoraron por mucho la experiencia.”</blockquote>
+          <blockquote>"Reservé una flotada en el río Malleo con un guía, y a ultimo momento mis amigos no pudieron venir. Por suerte con CastNet consegui dos tremendos pescadores (ahora amigos) que mejoraron por mucho la experiencia."</blockquote>
           <p class="author">Tom, EE.UU.</p>
         </div>
       </section>
 
-      <!-- Modal de Login/Register -->
       <div id="auth-modal" class="modal hidden">
         <div class="modal-content">
           <span class="close-btn" id="close-modal">&times;</span>
@@ -137,7 +137,6 @@
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
 
-  <!-- Firebase & Auth Logic -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script>
@@ -170,8 +169,28 @@
     const loginBtn = document.getElementById('btn-open-login');
     const registerBtn = document.getElementById('btn-open-register');
     const userIcon = document.getElementById('user-icon');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const logoutBtn = document.getElementById('logout');
 
     let isLogin = true;
+
+    userIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      profileDropdown.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!profileDropdown.contains(e.target) && !userIcon.contains(e.target)) {
+        profileDropdown.classList.remove('active');
+      }
+    });
+
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth.signOut();
+      profileDropdown.classList.remove('active');
+    });
 
     loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -271,14 +290,11 @@
         userIcon.classList.remove('hidden');
         loginBtn.classList.add('hidden');
         registerBtn.classList.add('hidden');
-
-        userIcon.addEventListener('click', () => {
-          auth.signOut();
-        });
       } else {
         userIcon.classList.add('hidden');
         loginBtn.classList.remove('hidden');
         registerBtn.classList.remove('hidden');
+        profileDropdown.classList.remove('active');
       }
     });
   </script>
