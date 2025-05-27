@@ -17,6 +17,7 @@
         <a href="#">Guides</a>
         <a href="#" id="btn-open-login">Log&nbsp;in</a>
         <a href="#" id="btn-open-register">Register</a>
+        <a href="#" id="user-icon" class="user-initials hidden"></a>
       </nav>
     </header>
 
@@ -110,16 +111,16 @@
             <input type="password" id="confirm-password" placeholder="Confirmar Contraseña" class="hidden" />
             <button type="submit" id="btn-auth-action">Ingresar</button>
           </form>
-<div id="social-logins" class="social-buttons">
-  <button id="btn-google" class="social-button">
-    <img src="assets/google-logo.png" alt="Google logo" />
-    Continuar con Google
-  </button>
-  <button id="btn-facebook" class="social-button">
-    <img src="assets/facebook-logo.png" alt="Facebook logo" />
-    Continuar con Facebook
-  </button>
-</div>
+          <div id="social-logins" class="social-buttons">
+            <button id="btn-google" class="social-button">
+              <img src="assets/google-logo.png" alt="Google logo" />
+              Continuar con Google
+            </button>
+            <button id="btn-facebook" class="social-button">
+              <img src="assets/facebook-logo.png" alt="Facebook logo" />
+              Continuar con Facebook
+            </button>
+          </div>
           <p id="auth-message"></p>
         </div>
       </div>
@@ -131,9 +132,9 @@
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
 
+  <!-- Firebase & Auth Logic -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
@@ -161,10 +162,13 @@
     const firstNameInput = document.getElementById('first-name');
     const lastNameInput = document.getElementById('last-name');
     const socialLogins = document.getElementById('social-logins');
+    const loginBtn = document.getElementById('btn-open-login');
+    const registerBtn = document.getElementById('btn-open-register');
+    const userIcon = document.getElementById('user-icon');
 
     let isLogin = true;
 
-    document.getElementById('btn-open-login').addEventListener('click', (e) => {
+    loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
       isLogin = true;
       modalTitle.textContent = 'Ingresar';
@@ -176,7 +180,7 @@
       modal.classList.remove('hidden');
     });
 
-    document.getElementById('btn-open-register').addEventListener('click', (e) => {
+    registerBtn.addEventListener('click', (e) => {
       e.preventDefault();
       isLogin = false;
       modalTitle.textContent = 'Registrarse';
@@ -249,6 +253,27 @@
         console.log('Usuario logueado:', user.email);
         modal.classList.add('hidden');
         authForm.reset();
+
+        const displayName = user.displayName || user.email;
+        const initials = displayName
+          .split(' ')
+          .map(word => word[0])
+          .join('')
+          .slice(0, 2)
+          .toUpperCase();
+
+        userIcon.textContent = initials;
+        userIcon.classList.remove('hidden');
+        loginBtn.classList.add('hidden');
+        registerBtn.classList.add('hidden');
+
+        userIcon.addEventListener('click', () => {
+          auth.signOut();
+        });
+      } else {
+        userIcon.classList.add('hidden');
+        loginBtn.classList.remove('hidden');
+        registerBtn.classList.remove('hidden');
       }
     });
   </script>
