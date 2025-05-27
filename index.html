@@ -16,7 +16,7 @@
         <div class="profile-dropdown" id="profile-dropdown">
           <a href="#profile">Mi Perfil</a>
           <a href="#settings">Ajustes de Perfil</a>
-          <a href="#publish">Publica Salida de Pesca</a>
+          <a href="#" id="btn-publish-trip">Publica Salida de Pesca</a>
           <a href="#search">Buscar Salida de Pesca</a>
           <a href="#" id="logout">Cerrar Sesión</a>
         </div>
@@ -130,6 +130,42 @@
         </div>
       </div>
 
+      <!-- Modal para publicar salida de pesca -->
+      <div id="publish-trip-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-btn" id="close-publish-modal">&times;</span>
+          <h2>Publicar Salida de Pesca</h2>
+          <form id="publish-trip-form">
+            <input type="text" id="trip-location" placeholder="Ubicación" required />
+            <input type="date" id="trip-start-date" placeholder="Día de comienzo" required />
+            <input type="date" id="trip-end-date" placeholder="Día de finalización" required />
+            <input type="time" id="trip-start-time" placeholder="Horario de salida" required />
+            <input type="time" id="trip-end-time" placeholder="Horario de finalización" required />
+            
+            <div class="form-group">
+              <label>Actividad:</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="activity" value="vadeo" required> Vadeo
+                </label>
+                <label>
+                  <input type="radio" name="activity" value="deriva"> Deriva: Bote/Balsa/Catarraft
+                </label>
+                <label>
+                  <input type="radio" name="activity" value="lancha"> Lancha
+                </label>
+                <label>
+                  <input type="radio" name="activity" value="otro"> Otro
+                </label>
+              </div>
+              <input type="text" id="activity-other" placeholder="Especificar otra actividad" class="hidden" />
+            </div>
+            
+            <button type="submit" class="cta-button">Publicar Salida</button>
+          </form>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -155,10 +191,13 @@
     const providerFacebook = new firebase.auth.FacebookAuthProvider();
 
     const modal = document.getElementById('auth-modal');
+    const publishTripModal = document.getElementById('publish-trip-modal');
     const modalTitle = document.getElementById('modal-title');
     const btnAuthAction = document.getElementById('btn-auth-action');
     const closeModalBtn = document.getElementById('close-modal');
+    const closePublishModalBtn = document.getElementById('close-publish-modal');
     const authForm = document.getElementById('auth-form');
+    const publishTripForm = document.getElementById('publish-trip-form');
     const authMessage = document.getElementById('auth-message');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -171,8 +210,54 @@
     const userIcon = document.getElementById('user-icon');
     const profileDropdown = document.getElementById('profile-dropdown');
     const logoutBtn = document.getElementById('logout');
+    const btnPublishTrip = document.getElementById('btn-publish-trip');
+    const activityOtherInput = document.getElementById('activity-other');
 
     let isLogin = true;
+
+    // Manejo del modal de publicación
+    btnPublishTrip.addEventListener('click', (e) => {
+      e.preventDefault();
+      profileDropdown.classList.remove('active');
+      publishTripModal.classList.remove('hidden');
+    });
+
+    closePublishModalBtn.addEventListener('click', () => {
+      publishTripModal.classList.add('hidden');
+      publishTripForm.reset();
+    });
+
+    // Mostrar/ocultar campo "otro" en actividades
+    document.querySelectorAll('input[name="activity"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.value === 'otro') {
+          activityOtherInput.classList.remove('hidden');
+          activityOtherInput.required = true;
+        } else {
+          activityOtherInput.classList.add('hidden');
+          activityOtherInput.required = false;
+        }
+      });
+    });
+
+    // Manejo del formulario de publicación
+    publishTripForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        location: document.getElementById('trip-location').value,
+        startDate: document.getElementById('trip-start-date').value,
+        endDate: document.getElementById('trip-end-date').value,
+        startTime: document.getElementById('trip-start-time').value,
+        endTime: document.getElementById('trip-end-time').value,
+        activity: document.querySelector('input[name="activity"]:checked').value,
+        activityOther: document.getElementById('activity-other').value
+      };
+      
+      console.log('Datos de la salida:', formData);
+      // Aquí iría la lógica para guardar en la base de datos
+      publishTripModal.classList.add('hidden');
+      publishTripForm.reset();
+    });
 
     userIcon.addEventListener('click', (e) => {
       e.preventDefault();
