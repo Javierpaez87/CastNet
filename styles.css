@@ -13,12 +13,16 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Evitar scroll horizontal */
 }
 
 .hero {
   min-height: 100vh;
   background: url('assets/background.jpg') center/cover no-repeat;
   position: relative;
+  overflow-x: hidden;
 }
 
 .hero::before {
@@ -43,10 +47,17 @@ body {
   color: #ffffff;
   font-weight: 500;
   transition: opacity 0.2s ease;
+  font-size: 1rem;
 }
 
-.navbar nav a:hover { opacity: 0.75; }
-.logo { height: 42px; }
+.navbar nav a:hover {
+  opacity: 0.75;
+}
+
+.logo {
+  height: 42px;
+  max-width: 100%;
+}
 
 .content {
   position: relative;
@@ -59,8 +70,8 @@ body {
 
 .title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 1;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 1.1;
   margin: 0;
 }
 
@@ -89,15 +100,22 @@ body {
 
 .search-form input,
 .search-form button {
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
   border-radius: var(--radius);
   border: none;
-  font-size: 1rem;
+  font-size: 1.125rem;
+  min-height: 48px; /* Tamaño táctil mínimo recomendado */
+  transition: box-shadow 0.2s ease;
 }
 
 .search-form input {
   background: #ffffff;
   color: #1a1a1a;
+}
+
+.search-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--green-700);
 }
 
 .search-form button {
@@ -108,9 +126,11 @@ body {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.search-form button:hover {
+.search-form button:hover,
+.search-form button:focus {
   opacity: 0.9;
   transform: translateY(-2px);
+  outline: none;
 }
 
 .section-heading {
@@ -132,6 +152,7 @@ body {
   color: #1a1a1a;
   padding: 1rem 1.5rem;
   border-radius: var(--radius);
+  word-break: break-word; /* Evita overflow de texto largo */
 }
 
 .card-icon {
@@ -143,6 +164,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .card-icon svg {
@@ -161,6 +183,7 @@ body {
   margin: 0.25rem 0 0;
   font-size: 1rem;
   color: #444444;
+  line-height: 1.4;
 }
 
 /* Testimonios */
@@ -234,17 +257,17 @@ footer {
 .modal-content input {
   display: block;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
   margin: 1rem 0;
-  font-size: 1rem;
+  font-size: 1.125rem;
   border-radius: var(--radius);
   border: 1px solid #ccc;
 }
 
 .modal-content button {
   width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 1rem;
+  font-size: 1.125rem;
   font-weight: bold;
   background: var(--green-700);
   color: #ffffff;
@@ -278,12 +301,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero { background-position: center bottom; }
-  .content { padding-top: 3rem; padding-bottom: 1rem; }
-  .cta-button { font-size: 1rem; padding: 0.75rem 2rem; }
-}
+/* Social buttons */
 .social-buttons {
   display: flex;
   flex-direction: column;
@@ -296,8 +314,8 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 1.125rem;
   font-weight: 500;
   border: none;
   border-radius: var(--radius);
@@ -306,8 +324,8 @@ footer {
 }
 
 .social-button img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
@@ -331,15 +349,16 @@ footer {
   background-color: #155ec4;
   transform: translateY(-1px);
 }
+
 .user-button {
   background-color: var(--green-700);
   color: #ffffff;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.125rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -350,3 +369,68 @@ footer {
 .user-button:hover {
   background-color: var(--green-900);
 }
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .hero {
+    background-position: center bottom;
+  }
+
+  .content {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: clamp(2rem, 10vw, 4rem);
+    line-height: 1.2;
+    padding: 0 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    padding: 0 1rem;
+  }
+
+  .subtitle.small {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .search-form {
+    margin-bottom: 4rem;
+    padding: 0 1rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr !important; /* Una columna para inputs en móvil */
+  }
+
+  .search-form input,
+  .search-form button {
+    font-size: 1.25rem;
+    min-height: 52px;
+  }
+
+  .navbar nav a {
+    margin-left: 1rem;
+    font-size: 1.125rem;
+  }
+
+  .cards {
+    gap: 1rem;
+  }
+
+  .card {
+    grid-template-columns: 1fr !important; /* Cards apiladas */
+    padding: 1rem;
+  }
+
+  .card-icon {
+    margin: 0 0 1rem 0;
+    width: 48px;
+    height: 48px;
+    border-radius:
