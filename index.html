@@ -17,6 +17,16 @@
         <a href="#">Guides</a>
         <a href="#" id="btn-open-login">Log&nbsp;in</a>
         <a href="#" id="btn-open-register">Register</a>
+        import { useRouter } from 'next/router'
+        
+export default function PublicarButton() {
+  const router = useRouter()
+  return (
+    <button onClick={() => router.push('/crear-salida')} className="bg-blue-600 text-white px-4 py-2 rounded">
+      Publicar salida de pesca
+    </button>
+  )
+}
       </nav>
     </header>
 
