@@ -433,7 +433,10 @@ footer {
     margin: 0 0 1rem 0;
     width: 48px;
     height: 48px;
-    border-radius:
+    border-radius: 50%;
+  }
+}
+
 /* --- NUEVO LAYOUT DEL HEADER ---------------------------------------------- */
 .navbar {
   display: flex;              /* ya lo tenías, pero lo dejamos claro */
@@ -453,7 +456,7 @@ footer {
   margin-left: 1rem;          /* ajustá el valor si querés más/menos espacio */
 }
 
-/* Asegurar que “hidden” realmente oculte el avatar cuando no hay sesión */
+/* Asegurar que "hidden" realmente oculte el avatar cuando no hay sesión */
 .hidden {
   display: none !important;
 }
