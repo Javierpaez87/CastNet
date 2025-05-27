@@ -434,3 +434,26 @@ footer {
     width: 48px;
     height: 48px;
     border-radius:
+/* --- NUEVO LAYOUT DEL HEADER ---------------------------------------------- */
+.navbar {
+  display: flex;              /* ya lo tenías, pero lo dejamos claro */
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+/* Empuja el <nav> a la derecha para que logo + avatar queden a la izquierda */
+.navbar > nav {
+  margin-left: auto;          /* << empuja todo el nav al extremo derecho */
+  display: flex;
+  align-items: center;
+}
+
+/* Pequeño espacio entre logo y avatar */
+#user-icon {
+  margin-left: 1rem;          /* ajustá el valor si querés más/menos espacio */
+}
+
+/* Asegurar que “hidden” realmente oculte el avatar cuando no hay sesión */
+.hidden {
+  display: none !important;
+}
