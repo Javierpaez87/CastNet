@@ -227,7 +227,6 @@ footer {
   font-size: 0.75rem;
   padding: 1rem 0;
 }
-
 /* Modal de login/register */
 .modal {
   position: fixed;
@@ -240,7 +239,10 @@ footer {
 }
 
 .modal.hidden {
-  display: none;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .modal-content {
