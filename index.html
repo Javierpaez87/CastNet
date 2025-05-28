@@ -51,7 +51,7 @@
       </form>
 
       <h2 class="section-heading">Opciones recomendadas para ti</h2>
-      <section class="cards">
+      <section class="cards recommended-cards">
         <div class="card">
           <div class="card-icon">
             <img src="assets/lancha.png" alt="Lancha Icon" style="width: 28px; height: 28px;" />
@@ -82,6 +82,9 @@
           </div>
         </div>
       </section>
+
+      <h2 class="section-heading">Salidas Publicadas</h2>
+      <section class="cards user-trips-cards"></section>
 
       <h2 class="section-heading">Testimonios</h2>
       <section class="testimonials">
@@ -285,8 +288,8 @@
 
         if (error) throw error;
 
-        const cardsContainer = document.querySelector('.cards');
-        cardsContainer.innerHTML = trips.map(trip => `
+        const userTripsContainer = document.querySelector('.user-trips-cards');
+        userTripsContainer.innerHTML = trips.map(trip => `
           <div class="card">
             <div class="card-icon">
               <img src="assets/${trip.activity_type === 'vadeo' ? 'vadeo.png' : 
