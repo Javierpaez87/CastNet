@@ -3,16 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro – CastNet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Registro</h1>
-  <form id="registerForm">
-    <input type="email" id="email" placeholder="Email" required><br>
-    <input type="password" id="password" placeholder="Contraseña" required><br>
-    <button type="submit">Registrarse</button>
-  </form>
+  <div class="hero">
+    <div class="content">
+      <h1>Registro</h1>
+      <form id="registerForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit" class="cta-button">Registrarse</button>
+      </form>
 
-  <!-- Firebase -->
+      <div class="social-buttons">
+        <button id="btn-google" class="social-button">
+          <img src="assets/google-logo.png" alt="Google logo" />
+          Continuar con Google
+        </button>
+        <button id="btn-facebook" class="social-button">
+          <img src="assets/facebook-logo.png" alt="Facebook logo" />
+          Continuar con Facebook
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
   <script>
@@ -28,6 +44,8 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const providerGoogle = new firebase.auth.GoogleAuthProvider();
+    const providerFacebook = new firebase.auth.FacebookAuthProvider();
 
     const form = document.getElementById('registerForm');
     form.addEventListener('submit', (e) => {
@@ -43,6 +61,24 @@
         .catch(error => {
           alert("Error: " + error.message);
         });
+    });
+
+    document.getElementById('btn-google').addEventListener('click', async () => {
+      try {
+        await auth.signInWithPopup(providerGoogle);
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    });
+
+    document.getElementById('btn-facebook').addEventListener('click', async () => {
+      try {
+        await auth.signInWithPopup(providerFacebook);
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
     });
   </script>
 </body>
