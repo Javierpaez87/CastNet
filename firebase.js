@@ -1,8 +1,7 @@
 // firebase.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
-// Configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
   authDomain: "castnet-8a81c.firebaseapp.com",
@@ -13,7 +12,6 @@ const firebaseConfig = {
   measurementId: "G-FFZPFNK4MW"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
