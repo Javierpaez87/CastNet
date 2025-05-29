@@ -182,15 +182,15 @@
   </footer>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
     import { supabase } from './src/supabaseClient.js';
     
     const firebaseConfig = {
       apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
       authDomain: "castnet-8a81c.firebaseapp.com",
       projectId: "castnet-8a81c",
-      storageBucket: "castnet-8a81c.appspot.com",
+      storageBucket: "castnet-8a81c.firebaseapp.com",
       messagingSenderId: "685260060310",
       appId: "1:685260060310:web:e82e1193ec898d489474b7"
     };
@@ -324,12 +324,6 @@
       }
     });
 
-    logoutBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      auth.signOut();
-      profileDropdown.classList.remove('active');
-    });
-
     loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
       isLogin = true;
@@ -340,6 +334,7 @@
       lastNameInput.classList.add('hidden');
       confirmPasswordInput.classList.add('hidden');
       modal.classList.remove('hidden');
+      authMessage.textContent = '';
     });
 
     registerBtn.addEventListener('click', (e) => {
@@ -352,6 +347,7 @@
       lastNameInput.classList.remove('hidden');
       confirmPasswordInput.classList.remove('hidden');
       modal.classList.remove('hidden');
+      authMessage.textContent = '';
     });
 
     closeModalBtn.addEventListener('click', () => {
@@ -364,21 +360,21 @@
       e.preventDefault();
       const email = emailInput.value;
       const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
-      authMessage.textContent = '';
 
       try {
         if (isLogin) {
           await signInWithEmailAndPassword(auth, email, password);
           authMessage.style.color = 'green';
-          authMessage.textContent = 'Ingreso exitoso. ¡Bienvenido!';
+          authMessage.textContent = 'Ingreso exitoso';
+          setTimeout(() => modal.classList.add('hidden'), 1000);
         } else {
-          if (password !== confirmPassword) {
-            throw new Error("Las contraseñas no coinciden.");
+          if (password !== confirmPasswordInput.value) {
+            throw new Error('Las contraseñas no coinciden');
           }
           await createUserWithEmailAndPassword(auth, email, password);
           authMessage.style.color = 'green';
-          authMessage.textContent = 'Usuario registrado exitosamente.';
+          authMessage.textContent = 'Registro exitoso';
+          setTimeout(() => modal.classList.add('hidden'), 1000);
         }
       } catch (error) {
         authMessage.style.color = 'red';
@@ -389,8 +385,6 @@
     document.getElementById('btn-google').addEventListener('click', async () => {
       try {
         await signInWithPopup(auth, providerGoogle);
-        authMessage.style.color = 'green';
-        authMessage.textContent = 'Ingreso exitoso con Google.';
         modal.classList.add('hidden');
       } catch (error) {
         authMessage.style.color = 'red';
@@ -401,8 +395,6 @@
     document.getElementById('btn-facebook').addEventListener('click', async () => {
       try {
         await signInWithPopup(auth, providerFacebook);
-        authMessage.style.color = 'green';
-        authMessage.textContent = 'Ingreso exitoso con Facebook.';
         modal.classList.add('hidden');
       } catch (error) {
         authMessage.style.color = 'red';
@@ -410,9 +402,18 @@
       }
     });
 
+    logoutBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        profileDropdown.classList.remove('active');
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+      }
+    });
+
     auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('Usuario logueado:', user.email);
         modal.classList.add('hidden');
         authForm.reset();
 
