@@ -181,24 +181,24 @@
     © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
   </footer>
 
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { supabase } from './src/supabaseClient.js';
     
     const firebaseConfig = {
       apiKey: "AIzaSyB-jb3mybgixNPt4DbjveAamPLXPjfdUnw",
       authDomain: "castnet-8a81c.firebaseapp.com",
       projectId: "castnet-8a81c",
-      storageBucket: "castnet-8a81c.firebasestorage.app",
+      storageBucket: "castnet-8a81c.appspot.com",
       messagingSenderId: "685260060310",
       appId: "1:685260060310:web:e82e1193ec898d489474b7"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const providerGoogle = new firebase.auth.GoogleAuthProvider();
-    const providerFacebook = new firebase.auth.FacebookAuthProvider();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const providerGoogle = new GoogleAuthProvider();
+    const providerFacebook = new FacebookAuthProvider();
 
     const modal = document.getElementById('auth-modal');
     const publishTripModal = document.getElementById('publish-trip-modal');
@@ -369,14 +369,14 @@
 
       try {
         if (isLogin) {
-          await auth.signInWithEmailAndPassword(email, password);
+          await signInWithEmailAndPassword(auth, email, password);
           authMessage.style.color = 'green';
           authMessage.textContent = 'Ingreso exitoso. ¡Bienvenido!';
         } else {
           if (password !== confirmPassword) {
             throw new Error("Las contraseñas no coinciden.");
           }
-          await auth.createUserWithEmailAndPassword(email, password);
+          await createUserWithEmailAndPassword(auth, email, password);
           authMessage.style.color = 'green';
           authMessage.textContent = 'Usuario registrado exitosamente.';
         }
@@ -388,7 +388,7 @@
 
     document.getElementById('btn-google').addEventListener('click', async () => {
       try {
-        await auth.signInWithPopup(providerGoogle);
+        await signInWithPopup(auth, providerGoogle);
         authMessage.style.color = 'green';
         authMessage.textContent = 'Ingreso exitoso con Google.';
         modal.classList.add('hidden');
@@ -400,7 +400,7 @@
 
     document.getElementById('btn-facebook').addEventListener('click', async () => {
       try {
-        await auth.signInWithPopup(providerFacebook);
+        await signInWithPopup(auth, providerFacebook);
         authMessage.style.color = 'green';
         authMessage.textContent = 'Ingreso exitoso con Facebook.';
         modal.classList.add('hidden');
