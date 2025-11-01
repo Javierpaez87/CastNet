@@ -70,7 +70,7 @@ body{
   /* Imagen de fondo */
   content:"";
   position:absolute; inset:0;
-  background-image: url("assets/hero-castnet.jpg");
+  background-image: url("assets/background.jpg");
   background-size: cover;
   background-position: center 40%;
   transform: scale(1.02); /* leve zoom para evitar bandas al hacer cover */
