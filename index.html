@@ -8,36 +8,41 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="language-switch">
+    <button id="lang-es" class="active">ES</button>
+    <button id="lang-en">EN</button>
+  </div>
   <div class="hero">
     <header class="navbar">
       <img src="assets/hook-icon.png" alt="CastNet Logo" class="logo" />
       <div class="user-profile">
         <a href="#" id="user-icon" class="user-button hidden"></a>
         <div class="profile-dropdown" id="profile-dropdown">
-          <a href="#profile">Mi Perfil</a>
-          <a href="#settings">Ajustes de Perfil</a>
-          <a href="#" id="btn-publish-trip">Publica Salida de Pesca</a>
-          <a href="#search">Buscar Salida de Pesca</a>
-          <a href="#" id="logout">Cerrar Sesión</a>
+          <a href="#profile" data-i18n="profile.myProfile">Mi Perfil</a>
+          <a href="#settings" data-i18n="profile.settings">Ajustes de Perfil</a>
+          <a href="#" id="btn-publish-trip" data-i18n="profile.publishTrip">Publica Salida de Pesca</a>
+          <a href="#search" data-i18n="profile.searchTrip">Buscar Salida de Pesca</a>
+          <a href="#" id="logout" data-i18n="profile.logout">Cerrar Sesión</a>
         </div>
       </div>
       <nav>
-        <a href="#">Trips</a>
-        <a href="#">Anglers</a>
-        <a href="#">Guides</a>
-        <a href="#" id="btn-open-login">Log&nbsp;in</a>
-        <a href="#" id="btn-open-register">Register</a>
+        <a href="#" data-i18n="nav.trips">Salidas</a>
+        <a href="#" data-i18n="nav.anglers">Pescadores</a>
+        <a href="#" data-i18n="nav.guides">Guías</a>
+        <a href="#packages" data-i18n="nav.packages">Paquetes Completos</a>
+        <a href="#" id="btn-open-login" data-i18n="nav.login">Ingresar</a>
+        <a href="#" id="btn-open-register" data-i18n="nav.register">Registrarse</a>
       </nav>
     </header>
 
     <main class="content">
-      <h1 class="title">CastNet</h1>
-      <p class="subtitle small">Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos y lagos.</p>
-      <p class="subtitle small">Casteá en red.</p>
+      <h1 class="title" data-i18n="hero.title">CastNet</h1>
+      <p class="subtitle small" data-i18n="hero.subtitle1">Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos y lagos.</p>
+      <p class="subtitle small" data-i18n="hero.subtitle2">Casteá en red.</p>
 
       <form class="search-form" action="#" method="get">
         <div class="form-row">
-          <div class="form-field"><input type="text" placeholder="Ubicación" required></div>
+          <div class="form-field"><input type="text" data-i18n-placeholder="hero.searchLocation" placeholder="Ubicación" required></div>
           <div class="form-field"><input type="date" required></div>
           <div class="form-field"><input type="date" required></div>
         </div>
@@ -46,11 +51,11 @@
           <div class="form-field"><input type="time" required></div>
         </div>
         <div class="form-row">
-          <button type="submit" class="cta-button">Buscar</button>
+          <button type="submit" class="cta-button" data-i18n="hero.searchButton">Buscar</button>
         </div>
       </form>
 
-      <h2 class="section-heading">Opciones recomendadas para ti</h2>
+      <h2 class="section-heading" data-i18n="sections.recommended">Opciones recomendadas para ti</h2>
       <section class="cards recommended-cards">
         <div class="card">
           <div class="card-icon">
@@ -83,10 +88,26 @@
         </div>
       </section>
 
-      <h2 class="section-heading">Salidas Publicadas</h2>
+      <h2 class="section-heading" data-i18n="sections.published">Salidas Publicadas</h2>
       <section class="cards user-trips-cards"></section>
+    </main>
+  </div>
 
-      <h2 class="section-heading">Testimonios</h2>
+  <section class="packages-section" id="packages">
+    <h2 class="section-heading" data-i18n="sections.packages">Paquetes Completos de Fly Fishing</h2>
+
+    <div class="country-filters">
+      <button class="country-filter-btn active" data-country="all" data-i18n="packages.allCountries">Todos los Países</button>
+      <button class="country-filter-btn" data-country="Argentina" data-i18n="packages.argentina">Argentina</button>
+      <button class="country-filter-btn" data-country="Chile" data-i18n="packages.chile">Chile</button>
+    </div>
+
+    <div class="packages-grid" id="packages-grid"></div>
+  </section>
+
+  <div class="hero">
+    <main class="content">
+      <h2 class="section-heading" data-i18n="sections.testimonials">Testimonios</h2>
       <section class="testimonials">
         <div class="testimonial">
           <img src="assets/Luca.png" alt="Luca">
@@ -112,21 +133,21 @@
           <span class="close-btn" id="close-modal">&times;</span>
           <h2 id="modal-title">Autenticación</h2>
           <form id="auth-form">
-            <input type="text" id="first-name" placeholder="Nombre" class="hidden" />
-            <input type="text" id="last-name" placeholder="Apellido" class="hidden" />
-            <input type="email" id="email" placeholder="Email" required />
-            <input type="password" id="password" placeholder="Contraseña" required />
-            <input type="password" id="confirm-password" placeholder="Confirmar Contraseña" class="hidden" />
+            <input type="text" id="first-name" data-i18n-placeholder="modal.firstName" placeholder="Nombre" class="hidden" />
+            <input type="text" id="last-name" data-i18n-placeholder="modal.lastName" placeholder="Apellido" class="hidden" />
+            <input type="email" id="email" data-i18n-placeholder="modal.email" placeholder="Email" required />
+            <input type="password" id="password" data-i18n-placeholder="modal.password" placeholder="Contraseña" required />
+            <input type="password" id="confirm-password" data-i18n-placeholder="modal.confirmPassword" placeholder="Confirmar Contraseña" class="hidden" />
             <button type="submit" id="btn-auth-action">Ingresar</button>
           </form>
           <div id="social-logins" class="social-buttons">
             <button id="btn-google" class="social-button">
               <img src="assets/google-logo.png" alt="Google logo" />
-              Continuar con Google
+              <span data-i18n="modal.continueGoogle">Continuar con Google</span>
             </button>
             <button id="btn-facebook" class="social-button">
               <img src="assets/facebook-logo.png" alt="Facebook logo" />
-              Continuar con Facebook
+              <span data-i18n="modal.continueFacebook">Continuar con Facebook</span>
             </button>
           </div>
           <p id="auth-message"></p>
@@ -136,39 +157,39 @@
       <div id="publish-trip-modal" class="modal hidden">
         <div class="modal-content">
           <span class="close-btn" id="close-publish-modal">&times;</span>
-          <h2>Publicar Salida de Pesca</h2>
+          <h2 data-i18n="publishTrip.title">Publicar Salida de Pesca</h2>
           <form id="publish-trip-form">
-            <input type="text" id="trip-location" placeholder="Ubicación" required />
-            <input type="date" id="trip-start-date" placeholder="Día de comienzo" required />
-            <input type="date" id="trip-end-date" placeholder="Día de finalización" required />
-            <input type="time" id="trip-start-time" placeholder="Horario de salida" required />
-            <input type="time" id="trip-end-time" placeholder="Horario de finalización" required />
-            
+            <input type="text" id="trip-location" data-i18n-placeholder="publishTrip.location" placeholder="Ubicación" required />
+            <input type="date" id="trip-start-date" data-i18n-placeholder="publishTrip.startDate" placeholder="Día de comienzo" required />
+            <input type="date" id="trip-end-date" data-i18n-placeholder="publishTrip.endDate" placeholder="Día de finalización" required />
+            <input type="time" id="trip-start-time" data-i18n-placeholder="publishTrip.startTime" placeholder="Horario de salida" required />
+            <input type="time" id="trip-end-time" data-i18n-placeholder="publishTrip.endTime" placeholder="Horario de finalización" required />
+
             <div class="form-group">
-              <label>Actividad:</label>
+              <label data-i18n="publishTrip.activity">Actividad:</label>
               <div class="radio-group">
                 <label>
-                  <input type="radio" name="activity" value="vadeo" required> Vadeo
+                  <input type="radio" name="activity" value="vadeo" required> <span data-i18n="publishTrip.vadeo">Vadeo</span>
                 </label>
                 <label>
-                  <input type="radio" name="activity" value="deriva"> Deriva: Bote/Balsa/Catarraft
+                  <input type="radio" name="activity" value="deriva"> <span data-i18n="publishTrip.deriva">Deriva: Bote/Balsa/Catarraft</span>
                 </label>
                 <label>
-                  <input type="radio" name="activity" value="lancha"> Lancha
+                  <input type="radio" name="activity" value="lancha"> <span data-i18n="publishTrip.lancha">Lancha</span>
                 </label>
                 <label>
-                  <input type="radio" name="activity" value="otro"> Otro
+                  <input type="radio" name="activity" value="otro"> <span data-i18n="publishTrip.otro">Otro</span>
                 </label>
               </div>
-              <input type="text" id="activity-other" placeholder="Especificar otra actividad" class="hidden" />
+              <input type="text" id="activity-other" data-i18n-placeholder="publishTrip.otherActivity" placeholder="Especificar otra actividad" class="hidden" />
             </div>
 
             <div class="form-group">
-              <label for="available-spots">Lugares disponibles:</label>
+              <label for="available-spots" data-i18n="publishTrip.availableSpots">Lugares disponibles:</label>
               <input type="number" id="available-spots" min="1" value="1" required />
             </div>
-            
-            <button type="submit" class="cta-button">Publicar Salida</button>
+
+            <button type="submit" class="cta-button" data-i18n="publishTrip.publish">Publicar Salida</button>
           </form>
         </div>
       </div>
@@ -177,12 +198,13 @@
   </div>
 
   <footer>
-    © 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.
+    <p data-i18n="footer.copyright">© 2025 CastNet. Hecho en Patagonia. Todos los derechos reservados.</p>
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script type="module">
+    import { translations, getTranslation } from './src/translations.js';
     import { supabase } from './src/supabaseClient.js';
     
     const firebaseConfig = {
@@ -223,6 +245,101 @@
     const activityOtherInput = document.getElementById('activity-other');
 
     let isLogin = true;
+    let currentLang = 'es';
+    let currentCountryFilter = 'all';
+
+    function updateLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        elem.textContent = getTranslation(lang, key);
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n-placeholder');
+        elem.placeholder = getTranslation(lang, key);
+      });
+
+      document.querySelectorAll('.language-switch button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(`lang-${lang}`).classList.add('active');
+
+      loadCompletePackages();
+    }
+
+    document.getElementById('lang-es').addEventListener('click', () => updateLanguage('es'));
+    document.getElementById('lang-en').addEventListener('click', () => updateLanguage('en'));
+
+    async function loadCompletePackages() {
+      try {
+        let query = supabase
+          .from('complete_packages')
+          .select('*')
+          .order('price_usd', { ascending: true });
+
+        if (currentCountryFilter !== 'all') {
+          query = query.eq('country', currentCountryFilter);
+        }
+
+        const { data: packages, error } = await query;
+
+        if (error) throw error;
+
+        const packagesGrid = document.getElementById('packages-grid');
+        packagesGrid.innerHTML = packages.map(pkg => {
+          const includes = [];
+          if (pkg.includes_accommodation) includes.push(getTranslation(currentLang, 'packages.accommodation'));
+          if (pkg.includes_guide) includes.push(getTranslation(currentLang, 'packages.guide'));
+          if (pkg.includes_fishing) includes.push(getTranslation(currentLang, 'packages.fishing'));
+          if (pkg.includes_meals) includes.push(getTranslation(currentLang, 'packages.meals'));
+          if (pkg.includes_transport) includes.push(getTranslation(currentLang, 'packages.transport'));
+
+          const description = currentLang === 'es' ? pkg.description_es : pkg.description_en;
+          const difficultyLabel = getTranslation(currentLang, `packages.${pkg.difficulty_level}`);
+
+          return `
+            <div class="package-card">
+              <div class="package-card-content">
+                <h3>${pkg.package_name}</h3>
+                <div class="package-meta">
+                  <span>📍 ${pkg.location}</span>
+                  <span>⏱️ ${pkg.duration_days} ${getTranslation(currentLang, 'packages.days')}</span>
+                  <span>👥 ${pkg.max_guests} ${getTranslation(currentLang, 'packages.guests')}</span>
+                </div>
+                <p class="package-description">${description}</p>
+                <div class="package-includes">
+                  ${includes.map(inc => `<span>${inc}</span>`).join('')}
+                </div>
+                <p class="package-price">USD $${pkg.price_usd.toLocaleString()}</p>
+                <div class="package-meta">
+                  <span>${getTranslation(currentLang, 'packages.season')}: ${pkg.season_start} - ${pkg.season_end}</span>
+                </div>
+                <div class="package-meta">
+                  <span>${getTranslation(currentLang, 'packages.difficulty')}: ${difficultyLabel}</span>
+                </div>
+                <p class="package-species">${getTranslation(currentLang, 'packages.species')}: ${pkg.target_species.join(', ')}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Error loading packages:', error);
+      }
+    }
+
+    document.querySelectorAll('.country-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        currentCountryFilter = this.getAttribute('data-country');
+        document.querySelectorAll('.country-filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        loadCompletePackages();
+      });
+    });
+
+    loadCompletePackages();
 
     btnPublishTrip.addEventListener('click', (e) => {
       e.preventDefault();
