@@ -40,20 +40,7 @@
       <p class="subtitle small" data-i18n="hero.subtitle1">Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos y lagos.</p>
       <p class="subtitle small" data-i18n="hero.subtitle2">Casteá en red.</p>
 
-      <form class="search-form" action="#" method="get">
-        <div class="form-row">
-          <div class="form-field"><input type="text" data-i18n-placeholder="hero.searchLocation" placeholder="Ubicación" required></div>
-          <div class="form-field"><input type="date" required></div>
-          <div class="form-field"><input type="date" required></div>
-        </div>
-        <div class="form-row">
-          <div class="form-field"><input type="time" required></div>
-          <div class="form-field"><input type="time" required></div>
-        </div>
-        <div class="form-row">
-          <button type="submit" class="cta-button" data-i18n="hero.searchButton">Buscar</button>
-        </div>
-      </form>
+      <button id="btn-open-search" class="main-cta-button" data-i18n="hero.planButton">Plan your next Cast</button>
 
       <h2 class="section-heading" data-i18n="sections.recommended">Opciones recomendadas para ti</h2>
       <section class="cards recommended-cards">
@@ -194,6 +181,21 @@
         </div>
       </div>
 
+      <div id="search-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-btn" id="close-search-modal">&times;</span>
+          <h2 data-i18n="searchModal.title">Buscar Salida de Pesca</h2>
+          <form id="search-form">
+            <input type="text" id="search-location" data-i18n-placeholder="searchModal.location" placeholder="Ubicación" required />
+            <input type="date" id="search-start-date" data-i18n-placeholder="searchModal.startDate" placeholder="Fecha de inicio" required />
+            <input type="date" id="search-end-date" data-i18n-placeholder="searchModal.endDate" placeholder="Fecha de fin" required />
+            <input type="time" id="search-start-time" data-i18n-placeholder="searchModal.startTime" placeholder="Hora de inicio" required />
+            <input type="time" id="search-end-time" data-i18n-placeholder="searchModal.endTime" placeholder="Hora de fin" required />
+            <button type="submit" class="cta-button" data-i18n="searchModal.search">Buscar</button>
+          </form>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -223,12 +225,15 @@
 
     const modal = document.getElementById('auth-modal');
     const publishTripModal = document.getElementById('publish-trip-modal');
+    const searchModal = document.getElementById('search-modal');
     const modalTitle = document.getElementById('modal-title');
     const btnAuthAction = document.getElementById('btn-auth-action');
     const closeModalBtn = document.getElementById('close-modal');
     const closePublishModalBtn = document.getElementById('close-publish-modal');
+    const closeSearchModalBtn = document.getElementById('close-search-modal');
     const authForm = document.getElementById('auth-form');
     const publishTripForm = document.getElementById('publish-trip-form');
+    const searchForm = document.getElementById('search-form');
     const authMessage = document.getElementById('auth-message');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -238,6 +243,7 @@
     const socialLogins = document.getElementById('social-logins');
     const loginBtn = document.getElementById('btn-open-login');
     const registerBtn = document.getElementById('btn-open-register');
+    const btnOpenSearch = document.getElementById('btn-open-search');
     const userIcon = document.getElementById('user-icon');
     const profileDropdown = document.getElementById('profile-dropdown');
     const logoutBtn = document.getElementById('logout');
@@ -350,6 +356,29 @@
     closePublishModalBtn.addEventListener('click', () => {
       publishTripModal.classList.add('hidden');
       publishTripForm.reset();
+    });
+
+    btnOpenSearch.addEventListener('click', () => {
+      searchModal.classList.remove('hidden');
+    });
+
+    closeSearchModalBtn.addEventListener('click', () => {
+      searchModal.classList.add('hidden');
+      searchForm.reset();
+    });
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const searchData = {
+        location: document.getElementById('search-location').value,
+        startDate: document.getElementById('search-start-date').value,
+        endDate: document.getElementById('search-end-date').value,
+        startTime: document.getElementById('search-start-time').value,
+        endTime: document.getElementById('search-end-time').value
+      };
+      console.log('Searching with:', searchData);
+      searchModal.classList.add('hidden');
+      searchForm.reset();
     });
 
     document.querySelectorAll('input[name="activity"]').forEach(radio => {

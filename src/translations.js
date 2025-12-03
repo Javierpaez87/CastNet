@@ -12,8 +12,18 @@ export const translations = {
       title: 'CastNet',
       subtitle1: 'Conectá con pescadores y guías, compartí flotadas y conocé nuevos ríos y lagos.',
       subtitle2: 'Casteá en red.',
+      planButton: 'Plan your next Cast',
       searchLocation: 'Ubicación',
       searchButton: 'Buscar'
+    },
+    searchModal: {
+      title: 'Buscar Salida de Pesca',
+      location: 'Ubicación',
+      startDate: 'Fecha de inicio',
+      endDate: 'Fecha de fin',
+      startTime: 'Hora de inicio',
+      endTime: 'Hora de fin',
+      search: 'Buscar'
     },
     sections: {
       recommended: 'Opciones recomendadas para ti',
@@ -91,8 +101,18 @@ export const translations = {
       title: 'CastNet',
       subtitle1: 'Connect with anglers and guides, share float trips and discover new rivers and lakes.',
       subtitle2: 'Cast your net.',
+      planButton: 'Plan your next Cast',
       searchLocation: 'Location',
       searchButton: 'Search'
+    },
+    searchModal: {
+      title: 'Search Fishing Trip',
+      location: 'Location',
+      startDate: 'Start Date',
+      endDate: 'End Date',
+      startTime: 'Start Time',
+      endTime: 'End Time',
+      search: 'Search'
     },
     sections: {
       recommended: 'Recommended options for you',
