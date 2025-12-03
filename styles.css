@@ -22,46 +22,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
-  /* NUEVO: fondo oscuro para que el “teléfono” resalte */
-  background: #050b08;
 }
 
-/* HERO GENERAL (ENVUELVE LOS DOS HERO) */
 .hero {
   min-height: 100vh;
-  background: url('assets/background.jpg') center 22%/cover no-repeat;
+  background: url('assets/background.jpg') center center/cover no-repeat;
   position: relative;
-  overflow: hidden;
-
-  /* NUEVO: marco tipo teléfono */
-  max-width: 430px;
-  width: 100%;
-  margin: 2rem auto;
-  border-radius: 32px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+  overflow-x: hidden;
 }
 
-/* Gradiente sobre la imagen (más cálido, menos azul) */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 40, 32, 0.65) 0%,
-    rgba(40, 70, 50, 0.30) 40%,
-    rgba(10, 25, 20, 0.80) 100%
-  );
-}
-
-/* Segundo hero (testimonios) SIN foto de fondo */
-.hero:nth-of-type(2) {
-  background: #0b1518;
-  min-height: auto;
-}
-
-.hero:nth-of-type(2)::before {
-  background: none;
+  background: linear-gradient(180deg, rgba(26,61,82,0.85) 0%, rgba(44,95,124,0.40) 50%, rgba(26,61,82,0.90) 100%);
 }
 
 .navbar {
@@ -98,9 +72,9 @@ body {
 .content {
   position: relative;
   z-index: 2;
-  max-width: 360px; /* antes 800px */
+  max-width: 800px;
   margin: 0 auto;
-  padding: 4rem 1rem 2rem; /* antes 6rem */
+  padding: 6rem 1rem 2rem;
   text-align: center;
 }
 
@@ -505,25 +479,18 @@ footer {
 
 @media (max-width: 768px) {
   .hero {
-    /* mejor posición de la imagen en mobile */
-    background-position: center 18%;
+    background-position: 65% center;
     background-size: cover;
   }
 
-  /* usamos el mismo gradiente suave en mobile */
   .hero::before {
-    background: linear-gradient(
-      180deg,
-      rgba(20, 40, 32, 0.75) 0%,
-      rgba(40, 70, 50, 0.35) 40%,
-      rgba(10, 25, 20, 0.85) 100%
-    );
+    background: linear-gradient(180deg, rgba(26,61,82,0.88) 0%, rgba(44,95,124,0.50) 40%, rgba(26,61,82,0.92) 100%);
   }
 
   .content {
     padding-top: 3rem;
     padding-bottom: 1rem;
-    max-width: 360px;
+    max-width: 100%;
   }
 
   .title {
